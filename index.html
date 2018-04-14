@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Timetable generator</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-colorpicker.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+ 	<script type="text/javascript" src="js/bootstrap-colorpicker.min.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+</head>
+
+<body>	
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<h3 style="padding: 2%;text-align: center; font-weight: bold; font-size: 220%;">
+				Timetable Generator - IIT Mandi
+			</h3>
+		</div>
+	</div>
+	<div class="row clearfix">
+		<div class="col-md-10 column">
+		<div class="row clearfix" id="inputrow">
+		<div class="col-md-2 column"><input type=text class="form-control" id=ccode placeholder="Course code"/></div>
+		<div class="col-md-2 column"><div class="input-group">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-question-sign" data-toggle="tooltip"  id="helpicon"></i></span>
+			<input type=text class="form-control" id=cslots placeholder="Slots"/>
+		</div></div>
+		<div class="col-md-2 column"><input type=text class="form-control" id=cvenue placeholder="Venue"/></div>
+		<div class="col-md-1 column"><button style="background: green;" class="btn btn-primary" onclick="addCourse($('#ccode').val(),$('#cslots').val(),$('#cvenue').val(), $('#color').val())">Add</button></div>
+
+		</div>
+		<div class="row">&nbsp;</div> 
+		<div class="row clearfix">
+		<div class="col-md-12 column">
+			<table class="table table-bordered maintbl">
+				<thead style="background: cyan;">
+					<tr style="font-size: 130%;">
+						<th colspan=3 class=tm2 style="font-size: large;">Time</th>
+						<th>Monday</th>
+						<th>Tuesday</th>
+						<th>Wednesday</th>
+						<th>Thursday</th>
+						<th>Friday</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td class=structtd></td>
+					<td colspan=2 class="tm">
+						8:00-<br>8:50
+					</td>
+					<td class="slot-1 slot-1A"><span class="slot-name">1A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-4 slot-4B"><span class="slot-name">4B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-7 slot-7A"><span class="slot-name">7A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-3 slot-3C"><span class="slot-name">3C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-7 slot-7B"><span class="slot-name">7B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+				</tr>
+				<tr>
+					<td class=structtd></td>
+					<td class=tm>
+						9:00-<br>9:50
+					</td>
+					<td class=tm rowspan=2>
+						9:30-<br>10:55
+					</td>
+					<td class="slot-2 slot-2A slot-clash-LM clashbuddy-3A clashbuddy-4A"><span class="slot-name">2A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-LM  slot-clash-2A slot-clash-3A slot-clash-4A" style="display:none" rowspan=4><span class="slot-name">LM</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-1 slot-1B slot-clash-LT clashbuddy-2B clashbuddy-3B"><span class="slot-name">1B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-LT  slot-clash-1B slot-clash-2B slot-clash-3B" style="display:none" rowspan=4><span class="slot-name">LM</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-5 slot-5A slot-clash-L5 clashbuddy-6A" rowspan=2><span class="slot-name">5A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-L5  slot-clash-5A slot-clash-6A" style="display:none" rowspan=4><span class="slot-name">L5</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-4 slot-4C slot-clash-LH clashbuddy-1C clashbuddy-2C"><span class="slot-name">4C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-LH  slot-clash-4C slot-clash-1C slot-clash-2C" style="display:none" rowspan=4><span class="slot-name">LM</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-5 slot-5B  slot-clash-L6 clashbuddy-6B" rowspan=2><span class="slot-name">5B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-clash-5B slot-clash-6B slot-L6" style="display:none" rowspan=4><span class="slot-name">L6</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+				</tr>
+				<tr>
+					<td class=structtd></td>
+					<td class=tm rowspan=2>
+						10:00-<br>10:50
+					</td>
+					<td class="slot-3 slot-3A slot-clash-LM clashbuddy-2A clashbuddy-3A" rowspan=2><span class="slot-name">3A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-2 slot-2B slot-clash-LT clashbuddy-1B clashbuddy-3B" rowspan=2><span class="slot-name">2B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-1 slot-1C slot-clash-LH clashbuddy-4C clashbuddy-2C" rowspan=2><span class="slot-name">1C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+				</tr>	
+				<tr>
+					<td class=structtd></td>
+					<td class=tm rowspan=2>
+						11:00-<br>12:25
+					</td>
+					<td class="slot-6 slot-6A slot-clash-L5 clashbuddy-5A" rowspan=2><span class="slot-name">6A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-6 slot-6B slot-clash-L6 clashbuddy-6A" rowspan=2><span class="slot-name">6B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+				</tr>				
+				<tr>
+					<td class=structtd></td>
+					<td class=tm >
+						11:00-<br>11:50
+					</td>
+					<td class="slot-4 slot-4A slot-clash-LM clashbuddy-2A clashbuddy-3A"><span class="slot-name">4A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-3 slot-3B slot-clash-LT clashbuddy-1B clashbuddy-2B"><span class="slot-name">3B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-2 slot-2C slot-clash-LH clashbuddy-4C clashbuddy-1C"><span class="slot-name">2C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+				</tr>		
+				<tr>
+					<td class=structtd></td>
+					<td colspan=2 class=tm>12:00-<br>2:00</td>
+					<td colspan=42 style="text-align:center;background: yellow;">Lunch Break</td>
+				</tr>		
+				<tr>
+					<td class=structtd></td>
+					<td class=tm>2:00-<br>2:50</td>
+					<td class=tm rowspan=2>2:00-<br>3:25</td>
+					<td class="slot-8 slot-8A slot-clash-L1 clashbuddy-9A" rowspan=2><span class="slot-name">8A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-L1 slot-clash-9A slot-clash-8A" style="display:none" rowspan=4><span class="slot-name">L1</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>		
+					<td class="slot-10 slot-10A slot-clash-L2 clashbuddy-11A" rowspan=2><span class="slot-name">10A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-L2  slot-clash-10A slot-clash-11A" style="display:none" rowspan=4><span class="slot-name">L2</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>		
+					<td class="slot-X slot-X1 slot-clash-Lx clashbuddy-X2 clashbuddy-X3" style="display:none"><span class="slot-name">X1</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-Lx slot-clash-X slot-clash-X1 slot-clash-X2 slot-clash-X3"  rowspan=4><span class="slot-name">Lx</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-8 slot-8B slot-clash-L3 clashbuddy-9B" rowspan=2><span class="slot-name">8B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-L3 slot-clash-8B slot-clash-9B" style="display:none" rowspan=4><span class="slot-name">L3</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>		
+					<td class="slot-10 slot-10B slot-clash-L4 clashbuddy-11B" rowspan=2><span class="slot-name">10B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-L4 slot-clash-10B slot-clash-11B" style="display:none" rowspan=4><span class="slot-name">L4</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>		
+				</tr>
+				<tr>
+					<td class=structtd></td>
+					<td class=tm rowspan=2>3:00-<br>3:50</td>
+					<td class="slot-X slot-X2 slot-clash-Lx clashbuddy-X1 clashbuddy-X3" style="display:none" rowspan=2><span class="slot-name">X2</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+				</tr>
+				<tr>
+					<td class=structtd></td>
+					<td class=tm rowspan=2>4:00-<br>4:50</td>
+					<td class="slot-9 slot-9A slot-clash-L1 clashbuddy-8A" rowspan=2><span class="slot-name">9A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-11 slot-11A slot-clash-L2 clashbuddy-10A" rowspan=2><span class="slot-name">11A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-9 slot-9B slot-clash-L3 clashbuddy-8B" rowspan=2><span class="slot-name">9B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					<td class="slot-11 slot-11B slot-clash-L4 clashbuddy-10B" rowspan=2><span class="slot-name">11B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+				</tr>
+				<tr>
+					<td class=structtd></td>
+					<td class=tm>4:00-<br>4:50</td>
+					<td class="slot-X slot-X3 slot-clash-Lx  clashbuddy-X2 clashbuddy-X1" style="display:none"><span class="slot-name">X3</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+		</div>
+		<div class="col-md-2 column"><br><br></br></br>
+			<table class="table table-striped table-hover" style="background: cyan;">
+				<thead>
+					<tr>
+						<th colspan=2>
+							Course list
+						</th>
+					</tr>
+				</thead>
+				<tbody id="listb"></tbody>
+			</table>
+		</div>
+		
+	</div>
+	<div class=row></div>
+</div>
+</body>
+</html>
